@@ -112,9 +112,18 @@ export default function SettingsPage() {
     }
   };
 
-  const copyInvite = () => {
-    navigator.clipboard.writeText(inviteUrl);
-    setToast("招待リンクをコピーしたよ！");
+  const shareInvite = async () => {
+    const message = `${user?.name ?? ""}さんが${family?.name ?? ""}に招待しています！`;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "きぶんカレンダー", text: message, url: inviteUrl });
+      } catch {
+        // キャンセル時は何もしない
+      }
+    } else {
+      await navigator.clipboard.writeText(`${message}\n${inviteUrl}`);
+      setToast("招待リンクをコピーしたよ！");
+    }
   };
 
   const handleSignOut = async () => {
@@ -235,7 +244,7 @@ export default function SettingsPage() {
                 <label className={styles.fieldLabel}>家族を招待する</label>
                 <div className={styles.inviteRow}>
                   <span className={styles.inviteUrl}>{inviteUrl}</span>
-                  <Button variant="secondary" onClick={copyInvite}>コピー</Button>
+                  <Button variant="secondary" onClick={shareInvite}>シェア</Button>
                 </div>
               </div>
             </section>

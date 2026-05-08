@@ -11,6 +11,7 @@ export default function InvitePage() {
   const { uid, loading: authLoading } = useAuth();
   const router = useRouter();
   const [familyName, setFamilyName] = useState("");
+  const [inviterName, setInviterName] = useState("");
   const [error, setError] = useState("");
   const [joining, setJoining] = useState(false);
 
@@ -21,8 +22,12 @@ export default function InvitePage() {
       return;
     }
     getFamilyByToken(token).then((fam) => {
-      if (fam) setFamilyName(fam.name);
-      else setError("招待リンクが無効です");
+      if (fam) {
+        setFamilyName(fam.name);
+        setInviterName(fam.inviterName);
+      } else {
+        setError("招待リンクが無効です");
+      }
     });
   }, [token, authLoading, uid, router]);
 
@@ -44,7 +49,10 @@ export default function InvitePage() {
       <div className={styles.card}>
         <p className={styles.emoji}>👨‍👩‍👧‍👦</p>
         <h1 className={styles.title}>招待が届いたよ</h1>
-        <p className={styles.fam}>{familyName || "…"} に参加しませんか？</p>
+        <p className={styles.fam}>
+          {inviterName ? `${inviterName}さんが` : ""}
+          {familyName || "…"}に招待しています！
+        </p>
         <Button fullWidth onClick={handleJoin} disabled={joining}>
           {joining ? "参加中…" : "参加する"}
         </Button>

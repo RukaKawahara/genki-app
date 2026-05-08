@@ -44,7 +44,7 @@ export async function getFamily(familyId: string): Promise<Family | null> {
   };
 }
 
-export async function getFamilyByToken(token: string): Promise<Family | null> {
+export async function getFamilyByToken(token: string): Promise<(Family & { inviterName: string }) | null> {
   const supabase = createClient();
   const { data } = await supabase
     .from("families")
@@ -53,11 +53,30 @@ export async function getFamilyByToken(token: string): Promise<Family | null> {
     .single();
 
   if (!data) return null;
+
+  const { data: member } = await supabase
+    .from("family_members")
+    .select("user_id")
+    .eq("family_id", data.id)
+    .limit(1)
+    .single();
+
+  let inviterName = "";
+  if (member) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("name")
+      .eq("id", member.user_id)
+      .single();
+    inviterName = profile?.name ?? "";
+  }
+
   return {
     id: data.id,
     name: data.name,
     inviteToken: data.invite_token,
     members: [],
+    inviterName,
   };
 }
 

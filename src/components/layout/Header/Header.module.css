@@ -1,15 +1,16 @@
 .header {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
   padding: 1rem 1.25rem 0.75rem;
   background: #fff;
   border-bottom: 1px solid #f0f0f0;
+  box-sizing: border-box;
 }
 
 .inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  max-width: 480px;
-  margin: 0 auto;
+  justify-content: center;
 }
 
 .userWrap {

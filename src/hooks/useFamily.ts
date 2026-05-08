@@ -24,25 +24,29 @@ export function useFamilyMembers(family: Family | null) {
   const [members, setMembers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const fetch = useCallback(async () => {
     if (!family) return;
     setLoading(true);
     const supabase = createClient();
-    supabase.from("profiles").select("id, name, email, avatar_url").in("id", family.members).then(({ data: profiles }: { data: { id: string; name: string | null; email: string | null; avatar_url: string | null }[] | null }) => {
-      const profileMap = Object.fromEntries((profiles ?? []).map((p) => [p.id, p]));
-      setMembers(
-        family.members.map((uid) => ({
-          uid,
-          name: profileMap[uid]?.name ?? profileMap[uid]?.email ?? "名前未設定",
-          avatarUrl: profileMap[uid]?.avatar_url ?? "",
-          familyId: family.id,
-        }))
-      );
-      setLoading(false);
-    });
+    const { data: profiles } = await supabase
+      .from("profiles")
+      .select("id, name, email, avatar_url")
+      .in("id", family.members) as { data: { id: string; name: string | null; email: string | null; avatar_url: string | null }[] | null };
+    const profileMap = Object.fromEntries((profiles ?? []).map((p) => [p.id, p]));
+    setMembers(
+      family.members.map((uid) => ({
+        uid,
+        name: profileMap[uid]?.name ?? profileMap[uid]?.email ?? "名前未設定",
+        avatarUrl: profileMap[uid]?.avatar_url ?? "",
+        familyId: family.id,
+      }))
+    );
+    setLoading(false);
   }, [family]);
 
-  return { members, loading };
+  useEffect(() => { fetch(); }, [fetch]);
+
+  return { members, loading, refetch: fetch };
 }
 
 export function useFamilyMoods(family: Family | null, today: string) {

@@ -124,6 +124,19 @@ export default function SettingsPage() {
     router.push("/signin");
   };
 
+  const handleDeleteAccount = async () => {
+    if (!confirm("アカウントを削除すると、すべてのデータが失われます。本当に削除しますか？")) return;
+    const supabase = createClient();
+    const { error } = await supabase.rpc("delete_own_account");
+    if (error) {
+      console.error("delete account error:", error);
+      setToast("削除に失敗しました");
+      return;
+    }
+    await supabase.auth.signOut();
+    router.push("/signin");
+  };
+
   return (
     <div>
       <Header title="設定画面" />
@@ -221,9 +234,14 @@ export default function SettingsPage() {
         )}
 
         <section className={styles.section}>
-          <Button variant="ghost" fullWidth onClick={handleSignOut}>
-            サインアウト
-          </Button>
+          <div className={styles.dangerRow}>
+            <Button variant="ghost" onClick={handleSignOut}>
+              サインアウト
+            </Button>
+            <button className={styles.deleteBtn} onClick={handleDeleteAccount}>
+              アカウント削除
+            </button>
+          </div>
         </section>
       </div>
 

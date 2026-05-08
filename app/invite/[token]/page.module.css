@@ -1,0 +1,38 @@
+.center {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.emoji { font-size: 3rem; }
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.fam {
+  font-size: 1rem;
+  color: #666;
+}
+
+.error {
+  color: #e05050;
+  font-size: 0.95rem;
+}

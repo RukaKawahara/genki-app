@@ -1,0 +1,34 @@
+.card {
+  background: linear-gradient(135deg, #fff8ee, #fff3dc);
+  border: 2px solid #f5a623;
+  border-radius: 1.25rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  animation: popIn 0.3s ease;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: #f5a623;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.mission {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+}
+
+.sub {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

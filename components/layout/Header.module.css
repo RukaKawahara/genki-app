@@ -1,0 +1,163 @@
+.header {
+  padding: 1rem 1.25rem 0.75rem;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.userWrap {
+  position: relative;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.initials {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f5a623;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.sub {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-top: 0.1rem;
+}
+
+.caret {
+  font-size: 0.6rem;
+  margin-left: 0.3rem;
+  color: #aaa;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  z-index: 200;
+  min-width: 160px;
+  overflow: hidden;
+  animation: fadeIn 0.15s ease;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.65rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: #333;
+  text-align: left;
+}
+
+.dropdownItem:hover { background: #f8f8f8; }
+
+.dropdownItemActive {
+  color: #f5a623;
+  font-weight: 700;
+}
+
+.dropdownAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dropdownInitials {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #666;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.memberIcons {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.memberBtn {
+  background: none;
+  border: 2.5px solid transparent;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s;
+}
+
+.memberBtnActive {
+  border-color: #f5a623;
+}
+
+.memberAvatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.memberInitials {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #666;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,22 @@
+.card {
+  background: linear-gradient(135deg, #eefbf0, #dcf5e5);
+  border: 2px solid #4caf80;
+  border-radius: 1.25rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  animation: popIn 0.35s ease;
+}
+
+.emoji { font-size: 2.5rem; margin-bottom: 0.75rem; }
+
+.message {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2d7a50;
+  line-height: 1.5;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

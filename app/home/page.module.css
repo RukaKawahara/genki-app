@@ -1,0 +1,19 @@
+.content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dateLabel {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #555;
+}
+
+.loading, .empty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: #aaa;
+  font-size: 0.9rem;
+}

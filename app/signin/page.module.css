@@ -1,0 +1,95 @@
+.center {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: linear-gradient(160deg, #fff8ee 0%, #daeaf7 100%);
+}
+
+.card {
+  background: #fff;
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 360px;
+}
+
+.emoji {
+  font-size: 3rem;
+  margin: 0 0 0.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: #333;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0 0 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #ddd;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.input:focus {
+  border-color: #7bb8f5;
+}
+
+.error {
+  font-size: 0.85rem;
+  color: #e05;
+  margin: 0;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 0.8rem;
+  background: #7bb8f5;
+  color: #fff;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #5aa3ee;
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: #7bb8f5;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+}

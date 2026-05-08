@@ -1,0 +1,36 @@
+.banner {
+  background: linear-gradient(135deg, #fff8ee, #fff3dc);
+  border: 2px dashed #f5a623;
+  border-radius: 1rem;
+  padding: 0.875rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.text {
+  font-size: 0.85rem;
+  color: #555;
+  white-space: nowrap;
+}
+
+.text strong { color: #c87800; }
+
+.btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  background: #f5a623;
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}

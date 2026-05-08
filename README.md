@@ -100,7 +100,8 @@ $$;
 
 CREATE POLICY "family_members: select" ON family_members FOR SELECT TO authenticated
   USING (family_id IN (SELECT get_my_family_ids()));
-CREATE POLICY "family_members: insert" ON family_members FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "authenticated users can join" ON family_members FOR INSERT TO authenticated
+  WITH CHECK (user_id = auth.uid());
 
 -- moods テーブル
 CREATE TABLE moods (
@@ -118,8 +119,11 @@ ALTER TABLE moods ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "moods: select" ON moods FOR SELECT TO authenticated
   USING (user_id = auth.uid() OR is_same_family(user_id));
-CREATE POLICY "moods: insert" ON moods FOR INSERT TO authenticated WITH CHECK (true);
-CREATE POLICY "moods: update" ON moods FOR UPDATE TO authenticated USING (user_id = auth.uid());
+CREATE POLICY "users can insert own moods" ON moods FOR INSERT TO authenticated
+  WITH CHECK (user_id = auth.uid());
+CREATE POLICY "users can update own moods" ON moods FOR UPDATE TO authenticated
+  USING (user_id = auth.uid())
+  WITH CHECK (user_id = auth.uid());
 
 -- Storage: avatars バケット（パブリック）
 INSERT INTO storage.buckets (id, name, public) VALUES ('avatars', 'avatars', true)

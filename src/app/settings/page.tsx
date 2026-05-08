@@ -6,7 +6,7 @@ import Header from "@/components/layout/Header";
 import Button from "@/components/ui/Button";
 import Toast from "@/components/ui/Toast";
 import { useAuth } from "@/hooks/useAuth";
-import { useFamily } from "@/hooks/useFamily";
+import { useFamily, useFamilyMembers } from "@/hooks/useFamily";
 import { createFamily, updateFamilyName } from "@/lib/supabase/families";
 import { createClient } from "@/lib/supabase/client";
 import styles from "./page.module.css";
@@ -15,6 +15,7 @@ export default function SettingsPage() {
   const router = useRouter();
   const { uid, user } = useAuth();
   const { family, loading } = useFamily(uid);
+  const { members } = useFamilyMembers(family);
   const [name, setName] = useState(user?.name ?? "");
   const [avatar, setAvatar] = useState(user?.image ?? "");
   const [uploading, setUploading] = useState(false);
@@ -127,37 +128,39 @@ export default function SettingsPage() {
     <div>
       <Header title="設定画面" />
       <div className={styles.content}>
+        <div className={styles.profileCard}>
+          {avatar ? (
+            <Image
+              src={avatar}
+              alt="アイコン"
+              width={72}
+              height={72}
+              className={styles.avatarImg}
+            />
+          ) : (
+            <div className={styles.avatarPlaceholder}>
+              {user?.name?.charAt(0) ?? "?"}
+            </div>
+          )}
+          <p className={styles.profileName}>{user?.name ?? ""}</p>
+        </div>
+
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>アイコン</h2>
-          <div className={styles.avatarArea}>
-            {avatar ? (
-              <Image
-                src={avatar}
-                alt="アイコン"
-                width={80}
-                height={80}
-                className={styles.avatarImg}
-              />
-            ) : (
-              <div className={styles.avatarPlaceholder}>
-                {user?.name?.charAt(0) ?? "?"}
-              </div>
-            )}
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              style={{ display: "none" }}
-              onChange={handleAvatarUpload}
-            />
-            <Button
-              variant="secondary"
-              onClick={() => fileInputRef.current?.click()}
-              disabled={uploading}
-            >
-              {uploading ? "アップロード中…" : "写真を変更"}
-            </Button>
-          </div>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleAvatarUpload}
+          />
+          <Button
+            variant="secondary"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+          >
+            {uploading ? "アップロード中…" : "写真を変更"}
+          </Button>
         </section>
 
         <section className={styles.section}>
@@ -199,7 +202,21 @@ export default function SettingsPage() {
               <span className={styles.inviteUrl}>{inviteUrl}</span>
               <Button variant="secondary" onClick={copyInvite}>コピー</Button>
             </div>
-            <p className={styles.memberCount}>メンバー: {family.members.length}人</p>
+            <div className={styles.memberList}>
+              {members.map((m) => (
+                <div key={m.uid} className={styles.memberItem}>
+                  {m.avatarUrl ? (
+                    <Image src={m.avatarUrl} alt={m.name} width={36} height={36} className={styles.memberAvatar} />
+                  ) : (
+                    <div className={styles.memberAvatarPlaceholder}>{m.name.charAt(0)}</div>
+                  )}
+                  <span className={styles.memberName}>
+                    {m.name}
+                    {m.uid === uid && <span className={styles.youBadge}>あなた</span>}
+                  </span>
+                </div>
+              ))}
+            </div>
           </section>
         )}
 
